@@ -15,6 +15,7 @@ df = pd.read_excel(file_location)
 
 # Initialize dictionary to store inventors for each applicant
 applicants = {}
+# Some applicant names appear in different forms. If one word suffices to recognize the applicant substitute in each case the whole name by that word
 Tochange = ['JANSSEN', 'GILEAD', 'GLAXOSMITHKLINE', 'TOPELIA', 'BOEHRINGER', 'ABBOTT', \
             'TIBOTEC', 'CILA', 'MERCK']
 
