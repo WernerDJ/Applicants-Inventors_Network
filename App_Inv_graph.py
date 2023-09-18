@@ -45,6 +45,8 @@ for index, row in df.iterrows():
             # Standardize the applicant's name by checking for short name presence            
             for x in Tochange:
                 applicant = standardize_applicant_name(applicant, x)
+            # The line bellow should be edited to include any meaningless words appearing in the resulting network, this case is  
+            # a weird result that appeared in the Orbit Intelligence results list. 
             applicant = re.sub('GILEZ', '', applicant)
             
             # Check if applicant is not empty
