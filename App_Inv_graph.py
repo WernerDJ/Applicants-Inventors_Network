@@ -8,6 +8,11 @@ import networkx as nx
 import matplotlib.pyplot as plt
 from pathlib import Path
 import re
+import logging
+logging.disable(logging.CRITICAL) #disable loggins, reversed by line bellow
+#logging.disable(logging.NOTSET) # Comment for disabling loggins
+logging.basicConfig(level=logging.DEBUG, format='%(asctime)s -  %(levelname)s -  %(message)s')
+
 
 # Read Excel file
 file_location = Path(r"C:\Users\Werner\Documents\app-inv.xlsx")
@@ -15,9 +20,8 @@ df = pd.read_excel(file_location)
 
 # Initialize dictionary to store inventors for each applicant
 applicants = {}
-# Some applicant names appear in different forms. If one word suffices to recognize the applicant substitute in each case the whole name by that word
 Tochange = ['JANSSEN', 'GILEAD', 'GLAXOSMITHKLINE', 'TOPELIA', 'BOEHRINGER', 'ABBOTT', \
-            'TIBOTEC', 'CILA', 'MERCK']
+            'TIBOTEC', 'CILA', 'MERCK', 'SEPELO']
 
 # Function to standardize applicant names by checking for short name presence in long names
 def standardize_applicant_name(name, short_name):
@@ -31,24 +35,25 @@ def standardize_applicant_name(name, short_name):
     return name
 
 # Iterate over rows and populate dictionary
+logging.debug('Start of networking')
 for index, row in df.iterrows():
     # Check if applicant and inventor columns are not empty
     if not pd.isna(row['Applicants']) and not pd.isna(row['Inventors']):
         # Split applicant and inventor strings by new line
         applicant_list = row['Applicants'].split('\n')
         inventor_list = row['Inventors'].split('\n')
+        
         # Iterate over applicants and assign inventors
         for applicant in applicant_list:
             # Remove leading/trailing spaces and quotes
+            logging.debug('i\Raw_Applicant is ' + applicant)
             applicant = applicant.strip().strip('"')
             
             # Standardize the applicant's name by checking for short name presence            
             for x in Tochange:
                 applicant = standardize_applicant_name(applicant, x)
-            # The line bellow should be edited to include any meaningless words appearing in the resulting network, this case is  
-            # a weird result that appeared in the Orbit Intelligence results list. 
             applicant = re.sub('GILEZ', '', applicant)
-            
+            logging.debug('i\End_Applicant is ' + applicant)
             # Check if applicant is not empty
             if applicant != '':
                 # Limit the name of the applicant to achieve at least 20 characters
