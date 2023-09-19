@@ -1,6 +1,6 @@
 # Applicants-Inventors_Network
 
-The code has been designed to analize a patent list obtained from a patent search. In this case the search engine used was that of Orbit Intelligence
+The code has been designed to analize a patent list obtained from a patent search. In this case the search engine used was that of Orbit Intelligence \n
 Other patent databases will provide a different output format or a different type of file (like a csv, xml, etc)
 The result list is then analized to establish connections between the different applicants. The connections depend on the different applicants disclosing the same inventors.
 That can be either because an application (or more) present both applicants as the result of a collaboration, because the inventors have changed employers durig their careers or because a company has aquired another which already had patents filed and with the compeny their R&D crew. 
