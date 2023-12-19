@@ -10,7 +10,7 @@ from pathlib import Path
 import re
 import logging
 logging.disable(logging.CRITICAL) #disable loggins, reversed by line bellow
-#logging.disable(logging.NOTSET) # Comment for disabling loggins
+#logging.disable(logging.NOTSET) # Comment for disabling loggins,  if enabled it will produce a list of all the variables under scrutiny
 logging.basicConfig(level=logging.DEBUG, format='%(asctime)s -  %(levelname)s -  %(message)s')
 
 
@@ -35,7 +35,7 @@ def standardize_applicant_name(name, short_name):
     return name
 
 # Iterate over rows and populate dictionary
-logging.debug('Start of networking')
+logging.debug('Start of networking') # This variable will be scrutinized and shoun in logging debug list
 for index, row in df.iterrows():
     # Check if applicant and inventor columns are not empty
     if not pd.isna(row['Applicants']) and not pd.isna(row['Inventors']):
@@ -46,7 +46,7 @@ for index, row in df.iterrows():
         # Iterate over applicants and assign inventors
         for applicant in applicant_list:
             # Remove leading/trailing spaces and quotes
-            logging.debug('i\Raw_Applicant is ' + applicant)
+            logging.debug('i\Raw_Applicant is ' + applicant) # This variable will be scrutinized and shoun in logging debug list
             applicant = applicant.strip().strip('"')
             
             # Standardize the applicant's name by checking for short name presence            
