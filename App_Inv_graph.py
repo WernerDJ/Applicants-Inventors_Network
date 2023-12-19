@@ -9,7 +9,7 @@ import matplotlib.pyplot as plt
 from pathlib import Path
 import re
 import logging
-logging.disable(logging.CRITICAL) #disable loggins, reversed by line bellow
+logging.disable(logging.CRITICAL) #disable loggins, reversed by line bellow (uncomment)
 #logging.disable(logging.NOTSET) # Comment for disabling loggins,  if enabled it will produce a list of all the variables under scrutiny
 logging.basicConfig(level=logging.DEBUG, format='%(asctime)s -  %(levelname)s -  %(message)s')
 
